@@ -1,0 +1,561 @@
+<div id="version" ng-style="{position:'absolute',left:'15px',bottom:'15px','font-size':'12px','text-decoration':'underline', 'z-index':5000}">V-android 1.6 | V-front 1.02 </div>
+<div class="zoomButtons">
+    <!-- <button class="ol-zoom-in1" type="button" title="Zoom in" ng-click="initialControllerService.ZoomIn()">+</button>
+    <button class="ol-zoom-out1" type="button" title="Zoom out" ng-click="initialControllerService.ZoomOut()">−</button> -->
+
+    <button title="north" ng-click="initialControllerService.setRotation()">N</button>
+    <button ng-click="initialControllerService.refresh()"><i class="material-icons">refresh</i></button>
+
+
+</div>
+
+
+
+<div>
+    <md-button class="md-icon-button md-primary" aria-label="Settings" id="drawer-toggle-btn"
+               ng-click="showHidePanel()">
+        <i class="material-icons">menu</i>
+    </md-button>
+
+</div>
+
+<div style=" padding-left:10px; position: absolute; top:0; right:0;  width:280px; background:rgba(0,0,0,0);  height: 100%; overflow-x: hidden; text-align: right">
+    <div class="mdl-layout__drawer-right mdl-color--grey-100" ng-class="{'active':activeClass}">
+
+       <!-- <md-content>-->
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab>
+                <md-tab-label><i class="material-icons">build</i></md-tab-label>
+                <md-tab-body>
+                    <md-content>
+
+
+
+                        <div ng-show="initialControllerService.getStatus()">
+                            <!--<ul class="colStyle">-->
+                                <div class="grid-container">
+
+
+                                <div class="grid-item" ng-if="theRole==roleDictionary.pebe|| theRole==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-disabled="false" ng-show="true"
+                                               ng-click="initialControllerService.beginParcel()"><i class="material-icons">home</i>
+                                        <md-tooltip md-direction="left">ახალი PEBE ობიექტი</md-tooltip>
+                                    </md-button>
+                                    <div>PEBE</div>
+                                </div>
+
+
+                                <div class="grid-item" ng-if="theRole==roleDictionary.pebe || theRole==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-disabled="false" ng-show="true" ng-click="initialControllerService.createPOI()">
+                                        <i class="material-icons">add location</i>
+                                        <md-tooltip md-direction="left">ახალი POI ობიექტი</md-tooltip>
+                                    </md-button>
+                                    <div>POI</div>
+                                </div>
+
+
+                                <div class="grid-item" ng-if="theRole==roleDictionary.traffic || theRole==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-disabled="false" ng-show="true"
+                                               ng-click="initialControllerService.createTrafficSign()">
+                                        <i class="material-icons">
+                                            traffic
+                                        </i>
+                                        <md-tooltip md-direction="left">საგზაო ნიშნის დამატება</md-tooltip>
+                                    </md-button>
+                                    <div>საგზაო ნიშანი</div>
+
+                                </div>
+
+
+                                <div class="grid-item" ng-if="theRole==roleDictionary.traffic || theRole==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-disabled="false" ng-show="true"
+                                               ng-click="initialControllerService.createBusStop()">
+                                        <i class="material-icons">directions_bus</i>
+                                        <md-tooltip md-direction="left">ავტობუსის გაჩერების დამატება</md-tooltip>
+                                    </md-button>
+                                    <div>ავტობ. გაჩერება</div>
+                                </div>
+
+
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-disabled="false" ng-show="true"
+                                               ng-click="initialControllerService.getErrors()">
+                                        <i class="material-icons">bug_report</i>
+                                        <md-tooltip md-direction="left">შეცდომები: ნაკვეთი, შენობა</md-tooltip>
+                                    </md-button>
+                                    <div>შეცდომები</div>
+                                </div>
+
+
+
+
+                                </div>
+
+
+
+                            <md-divider></md-divider>
+
+                            <div class="grid-container">
+
+
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.selectGeometry()" aria-label="მონიშვნა">
+                                        <i class="material-icons">tab unselected</i>
+                                        <md-tooltip md-direction="left">მონიშვნა</md-tooltip>
+                                    </md-button>
+                                    <div>მონიშვნა</div>
+
+                                </div>
+
+
+
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.edit_general($event)"">
+                                    <i class="material-icons">border_color</i>
+                                    <md-tooltip md-direction="left">რედაქტირება</md-tooltip>
+                                    </md-button>
+                                    <div>რედაქტირება</div>
+                                </div>
+
+
+
+                                <div class="grid-item">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.cancelTools()" aria-label="გაუქმება">
+                                        <i class="material-icons">clear</i>
+                                        <md-tooltip md-direction="left">გასუფთავება</md-tooltip>
+                                    </md-button>
+                                    <div>გასუფთავება</div>
+
+                                </div>
+
+
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.getInfo()">
+                                        <i class="material-icons">
+                                            info
+                                        </i>
+                                        <md-tooltip md-direction="left">ინფორმაცია</md-tooltip>
+                                    </md-button>
+                                    <div>ინფორმაცია</div>
+                                </div>
+
+                                <div class="grid-item" ng-if="theRole==roleDictionary.pebe || theRole==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-disabled="false" ng-show="true"
+                                               ng-click="initialControllerService.deleteExistingParcel($event)">
+                                        <i class="material-icons">delete</i>
+                                        <md-tooltip md-direction="left">არსებული პარსელის წაშლა</md-tooltip>
+                                    </md-button>
+                                    <div>პარსელის წაშლა</div>
+                                </div>
+                            </div>
+                            <md-divider></md-divider>
+                            <div class="grid-container">
+
+
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.measureTool('divne')" aria-label="მანძილის გაზომვა ">
+                                        <i class="material-icons">timeline</i>
+                                        <md-tooltip md-direction="left">მანძილის გაზომვა</md-tooltip>
+                                    </md-button>
+                                    <div>მანძ. გაზომვა</div>
+                                </div>
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip " ng-click="initialControllerService.measureTool('area')" aria-label="ფართობის გაზომვა ">
+                                        <i class="material-icons">filter none</i>
+                                        <md-tooltip md-direction="left">ფართობის გაზომვა</md-tooltip>
+                                    </md-button>
+                                    <div>ფართ. გაზომვა</div>
+                                </div>
+
+                                <div class="grid-item" >
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.myLocation()">
+                                        <i class="material-icons">gps_not_fixed</i>
+                                        <md-tooltip md-direction="left">GPS</md-tooltip>
+                                    </md-button>
+                                    <div>GPS</div>
+                                </div>
+
+
+
+
+                                <div class="grid-item" ng-if="theRole!==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.setExtentOnOngoingAssignment()">
+                                        <i class="material-icons">
+                                            trending_up
+                                        </i>
+                                        <md-tooltip md-direction="left">დავალებაზე გადასვლა</md-tooltip>
+                                    </md-button>
+                                    <div>გადასვლა</div>
+                                </div>
+
+
+
+                                <div class="grid-item" ng-if="theRole!==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.callImageUploader()">
+                                        <i class="material-icons">
+                                            photo_library
+                                        </i>
+                                        <md-tooltip md-direction="left">აუტვირთავი სურათები</md-tooltip>
+                                    </md-button>
+                                    <div>აუტვირთავი სურათები</div>
+                                </div>
+
+                                <div class="grid-item" ng-if="theRole==roleDictionary.admin">
+                                    <md-button class="md-raised md-icon-button test-tooltip" ng-click="initialControllerService.printStatistics()">
+                                        <i class="material-icons">
+                                            data_usage
+                                        </i>
+                                        <md-tooltip md-direction="left">სტატისტიკა</md-tooltip>
+                                    </md-button>
+                                    <div>სტატისტიკა</div>
+                                </div>
+
+
+
+                                <div class="grid-item">
+                                    <md-button class="md-raised md-icon-button test-tooltip" aria-label="signout" ng-click="signOut()">
+                                        <i class="material-icons">exit_to_app</i>
+                                        <md-tooltip md-direction="left">გამოსვლა</md-tooltip>
+                                    </md-button>
+                                    <div>გამოსვლა</div>
+                                </div>
+
+
+
+                                </div>
+
+                            <!--</ul>-->
+
+
+
+
+
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                            <ul ng-show="parcelControllerService.getStatus()" ng-if="theRole==roleDictionary.pebe || theRole==roleDictionary.admin">
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               ng-click="parcelControllerService.draw()" aria-label="ხაზვა">
+                                        <i class="material-icons">brush</i>ნაკვეთის ხაზვა
+                                    </md-button>
+                                </li>
+
+                                <li class="left"><md-button class="md-primary" ng-click="parcelControllerService.selectGeometry()" aria-label="ხაზვა">მონიშვნა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="parcelControllerService.copyGeometry()" aria-label="კოპირება">არსებული პარსელის კოპირება</md-button></li>
+
+
+                                <li class="left"><md-button class="md-primary" ng-click="parcelControllerService.cancelSelection()" aria-label="ხაზვა">გაუქმება</md-button></li>
+                                <li class="left"><md-button ng-show="true" ng-disabled="false" class="md-primary" aria-label="რედაქტირება" ng-click="parcelControllerService.edit_general($event)">რედაქტირება </md-button></li>
+
+
+                              <!--  <li class="left"><md-button ng-show="true" ng-disabled="false" class="md-primary" aria-label="რედაქტირება" ng-click="parcelControllerService.editGeometry()">რედაქტირება </md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="parcelControllerService.deleteObject()" aria-label="წაშლა">წაშლა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="parcelControllerService.editMetadata()" aria-label="წაშლა">ინფორმაციის რედაქტირება</md-button></li>-->
+
+
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               aria-label="გაგრძელება" ng-click="parcelControllerService.next()"><i
+                                            class="material-icons">arrow_right_alt</i>შემდეგი
+                                    </md-button>
+                                </li>
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-warn" aria-label="შეწყვეტა"
+                                               ng-click="parcelControllerService.stop()">შეწყვეტა
+                                    </md-button>
+                                </li>
+                            </ul>
+
+
+
+
+
+
+                            <ul ng-show="parcelEntranceControllerService.getStatus()" ng-if="theRole==roleDictionary.pebe || theRole==roleDictionary.admin">
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               ng-click="parcelEntranceControllerService.draw()" aria-label="ხაზვა">
+                                        <i class="material-icons">brush</i>ნაკვეთის შესასვლელი ხაზვა
+                                    </md-button>
+                                </li>
+
+                                <li class="left"><md-button class="md-primary" ng-click="parcelEntranceControllerService.selectGeometry()" aria-label="ხაზვა">მონიშვნა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="parcelEntranceControllerService.cancelSelection()" aria-label="ხაზვა">გაუქმება</md-button></li>
+
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               aria-label="რედაქტირება" ng-click="parcelEntranceControllerService.edit_general($event)">რედაქტირება
+                                    </md-button>
+                                </li>
+
+
+                               <!-- <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                                   aria-label="რედაქტირება" ng-click="parcelEntranceControllerService.editGeometry()">რედაქტირება
+                                    </md-button>
+                                </li>
+
+                                <li class="left"><md-button class="md-primary" ng-click="parcelEntranceControllerService.deleteObject()" aria-label="წაშლა">წაშლა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="parcelEntranceControllerService.editMetadata()" aria-label="წაშლა">ინფორმაციის რედაქტირება</md-button></li>-->
+
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               aria-label="გაგრძელება"
+                                               ng-click="parcelEntranceControllerService.next()">
+                                        <i class="material-icons">arrow_right_alt</i>{{parcelEntranceControllerService.isLastStep && parcelEntranceControllerService.addedBuildingsCount==0?'დასრულება':'შემდეგი'}}
+                                    </md-button>
+                                </li>
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-warn" aria-label="შეწყვეტა"
+                                               ng-click="parcelEntranceControllerService.stop()">შეწყვეტა
+                                    </md-button>
+                                </li>
+
+                            </ul>
+
+
+
+
+
+                            <ul ng-show="buildingControllerService.getStatus()" ng-if="theRole==roleDictionary.pebe || theRole==roleDictionary.admin">
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               ng-click="buildingControllerService.draw()" aria-label="ხაზვა"><i
+                                            class="material-icons">brush</i>შენობის ხაზვა
+                                    </md-button>
+                                </li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingControllerService.copyGeometry()" aria-label="კოპირება">არსებული შენობის კოპირება</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingControllerService.selectGeometry()" aria-label="ხაზვა">მონიშვნა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingControllerService.cancelSelection()" aria-label="ხაზვა">გაუქმება</md-button></li>
+
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               aria-label="რედაქტირება" ng-click="buildingControllerService.edit_general($event)">რედაქტირება
+                                    </md-button>
+                                </li>
+                                <!--<li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               aria-label="რედაქტირება" ng-click="buildingControllerService.editGeometry()">რედაქტირება
+                                    </md-button>
+                                </li>
+
+                                <li class="left"><md-button class="md-primary" ng-click="buildingControllerService.deleteObject()" aria-label="წაშლა">წაშლა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingControllerService.editMetadata()" aria-label="წაშლა">ინფორმაციის რედაქტირება</md-button></li>-->
+                                <li class="left"><md-button class="md-primary" ng-click="buildingControllerService.editEntrances()" aria-label="წაშლა">შესასვლელების რედაქტირება</md-button></li>
+                                <li class="left">
+                                    <!--buildingControllerService.getNextButtonStatus()-->
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               aria-label="დასრულება" ng-click="buildingControllerService.next()"><i
+                                            class="material-icons">done_all</i>დასრულება
+                                    </md-button>
+                                </li>
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-warn" aria-label="შეწყვეტა"
+                                               ng-click="buildingControllerService.stop()">შეწყვეტა
+                                    </md-button>
+                                </li>
+
+                            </ul>
+
+
+
+
+
+                            <ul ng-show="buildingEntranceControllerService.getStatus()" ng-if="theRole==roleDictionary.pebe || theRole==roleDictionary.admin">
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary"
+                                               ng-click="buildingEntranceControllerService.draw()" aria-label="ხაზვა">
+                                        <i class="material-icons">brush</i>შენობის შესასვლელის ხაზვა
+                                    </md-button>
+                                </li>
+
+                                <li class="left"><md-button class="md-primary" ng-click="buildingEntranceControllerService.selectGeometry()" aria-label="ხაზვა">მონიშვნა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingEntranceControllerService.cancelSelection()" aria-label="ხაზვა">გაუქმება</md-button></li>
+
+                                <li class="left"><md-button ng-show="true" ng-disabled="false" class="md-primary" aria-label="რედაქტირება" ng-click="buildingEntranceControllerService.edit_general($event)">რედაქტირება</md-button></li>
+
+                                <!--<li class="left"><md-button ng-show="true" ng-disabled="false" class="md-primary" aria-label="რედაქტირება" ng-click="buildingEntranceControllerService.editGeometry()">რედაქტირება</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingEntranceControllerService.deleteObject()" aria-label="წაშლა">წაშლა</md-button></li>
+                                <li class="left"><md-button class="md-primary" ng-click="buildingEntranceControllerService.editMetadata()" aria-label="წაშლა">ინფორმაციის რედაქტირება</md-button></li>-->
+
+
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-primary" aria-label="გაგრძელება" ng-click="buildingEntranceControllerService.next()">
+                                        {{buildingEntranceControllerService.isLast?'დასრულება':'შემდეგი'}}
+                                    </md-button>
+                                </li>
+                                <li class="left">
+                                    <md-button ng-show="true" ng-disabled="false" class="md-warn" aria-label="შეწყვეტა"
+                                               ng-click="buildingEntranceControllerService.stop()">შეწყვეტა
+                                    </md-button>
+                                </li>
+
+                            </ul>
+
+
+
+
+                        <ul ng-show="DrawingControllerService.getStatus()" >
+
+                            <li class="left">
+                                <md-button class="md-primary"
+                                           ng-click="DrawingControllerService.editGeometry()"
+                                           aria-label="რედაქტირება"><i class="material-icons">mode_edit</i>წვეროების
+                                    რედაქტირება
+                                </md-button>
+                            </li>
+
+                            <li class="left">
+                                <md-button ng-show="true" class="md-primary"
+                                           ng-click="DrawingControllerService.dragGeometry()"
+                                           aria-label="გადაადგილება">
+                                    <i class="material-icons" style>open_with</i>გადაადგილება
+                                </md-button>
+                            </li>
+
+                            <li class="left">
+                                <md-button ng-show="true" ng-disabled = "DrawingControllerService.saveButtonState" class="md-primary"
+                                           ng-click="DrawingControllerService.saveGeometry()" aria-label="შენახვა">
+                                    <i class="material-icons">save</i>შენახვა
+                                </md-button>
+                            </li>
+
+                            <li>
+
+                                <md-button ng-show="DrawingControllerService.featureType=='Polygon'" class="md-primary"
+                                           ng-click="DrawingControllerService.stopDrawing()" aria-label="ხაზვის დასრულება">
+                                    ხაზვის დასრულება
+                                </md-button>
+
+                            </li>
+
+
+                            <li>
+
+                                <md-button class="md-primary"
+                                           ng-click="DrawingControllerService.exit()" aria-label="გამოსვლა">
+                                    გამოსვლა
+                                </md-button>
+
+                            </li>
+
+
+                        </ul>
+
+
+
+                        <md-divider></md-divider>
+                        <div class="grid-container" style="width: 200px; grid-template-columns:100px 100px; margin-left:50px;  ">
+                            <div class="grid-item" ng-repeat="layerRec in layerChecks">
+                                <md-checkbox ng-model="layerRec.model" aria-label="layerRec.name" ng-change="changeLayerVisibility(layerRec.value)" style="width: 80px">
+                                    <span style="font-size: smaller">{{ layerRec.name }}</span>
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                        <md-divider></md-divider>
+                        <div ng-repeat="pair in orthoPairs track by $index" ng-style="{'border-bottom':'1px solid #ececec','font-size':'9px','width':'150px','padding':'30px'}">
+                            <md-radio-group ng-model="orthoPairValues[$index].value" ng-click="selectOrtho(orthoPairValues[$index], this)">
+
+                                <div ng-repeat='el in pair' class="row" >
+
+                                    <md-radio-button ng-value="el.key" class="md-primary">{{el.title}}</md-radio-button>
+                                </div>
+                             </md-radio-group>
+                        </div>
+
+
+                    </md-content>
+                </md-tab-body>
+                </md-tab>
+               <!-- <md-tab>
+                    <md-tab-label><i class="material-icons">layers</i></md-tab-label>
+                    <md-tab-body>
+                        <md-content layout-padding="">
+                            <div class="grid-container" style="width: 200px; grid-template-columns:100px 100px  ">
+                                <div class="grid-item" ng-repeat="layerRec in layerChecks">
+                                    <md-checkbox ng-model="layerRec.model" aria-label="layerRec.name" ng-change="changeLayerVisibility(layerRec.value)" style="width: 80px">
+                                        <span style="font-size: smaller">{{ layerRec.name }}</span>
+                                    </md-checkbox>
+                                </div>
+                            </div>
+
+                        </md-content>
+                    </md-tab-body>
+                </md-tab>-->
+
+                <md-tab>
+                    <md-tab-label><i class="material-icons">calendar_today</i></md-tab-label>
+                    <md-tab-body>
+                        <ul>
+                            <li class="left" ng-if="theRole==roleDictionary.admin"><md-button class="md-primary" ng-click="initialControllerService.assignTask()" aria-label="დავალების მინიჭება">დავალების მინიჭება</md-button></li>
+
+
+                            <li class="left"><md-button class="md-primary" ng-click="initialControllerService.completeTask()" aria-label="დავალების დასრულება">დავალების დასრულება</md-button></li>
+                            <li class="left" ><md-button class="md-primary" ng-click="initialControllerService.pauseTask()" aria-label="დავალების დაპაუზება">დავალების დაპაუზება</md-button></li>
+
+                            <li class="left"><md-button class="md-primary" ng-click="initialControllerService.taskErrors()" aria-label="დავალების დაპაუზება">დავალების შეცდომები</md-button></li>
+                            <li class="left"><md-button class="md-primary" ng-click="initialControllerService.selectGeometry()" aria-label="მონიშვნა">მონიშვნა</md-button></li>
+                            <li class="left"><md-button class="md-primary" ng-click="initialControllerService.cancelTools()" aria-label="გაუქმება">გაუქმება</md-button></li>
+
+                        </ul>
+
+                        <md-divider></md-divider>
+                        <div layout="column" layout-align="center center">
+                            <div>
+                                <md-select ng-model="searchType" aria-label="დადა" placeholder="აირჩიეთ ფენა">
+                                    <md-option ng-repeat="type in searchTypes" ng-value="type.value">{{type.title}}</md-option>
+                                </md-select>
+                            </div>
+                            <!--<div layout="row" layout-align="center center">-->
+                            <div>
+                                <input required type="number" step="any" name="rate" ng-model="searchable_id" />
+                            </div>
+                            <div>
+                                <md-button class="md-primary" ng-disabled="false" ng-show="true" ng-click="search()" aria-label="search">ძებნა</md-button>
+                            </div>
+                            <!--<div><md-button class="md-primary" ng-click="switchWMS_WFS()">{{wms_wfs}}-ზე გადართვა</md-button></div>-->
+                        </div>
+
+
+                        <md-divider></md-divider>
+                        <div class="grid-container" style="width: 200px; grid-template-columns:100px 100px; margin-left:50px;  ">
+                            <div class="grid-item" ng-repeat="layerRec in layerChecks">
+                                <md-checkbox ng-model="layerRec.model" aria-label="layerRec.name" ng-change="changeLayerVisibility(layerRec.value)" style="width: 80px">
+                                    <span style="font-size: smaller">{{ layerRec.name }}</span>
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+
+                    </md-tab-body>
+
+                </md-tab>
+
+
+            </md-tabs>
+        <!--</md-content>-->
+
+
+    </div>
+</div>
+
+

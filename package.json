@@ -1,0 +1,37 @@
+{
+  "name": "datacollection",
+  "version": "1.0.0",
+  "description": "collects data for GIS",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.napr.gov.ge/geo-data-collector/GEO-Data-Collector-Front.git"
+  },
+  "keywords": [
+    "dada"
+  ],
+  "author": "mjaparidze@napr.gov.ge",
+  "license": "MIT",
+  "dependencies": {
+    "angular-ui-bootstrap": "^2.5.6",
+    "bower": "^1.8.14",
+    "gulp-htmlmin": "^5.0.1"
+  },
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-cssnano": "^2.1.3",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-rev": "^9.0.0",
+    "gulp-uglify": "^3.0.1",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-usemin": "^0.3.29",
+    "gulp-useref": "^3.1.6",
+    "gulp-version-replace": "^1.0.9",
+    "rollup-plugin-uglify": "^6.0.2"
+  }
+}

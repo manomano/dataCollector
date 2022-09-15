@@ -1,0 +1,34 @@
+<md-dialog aria-label="აირჩიეთ ერთი ობიექტი">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div class="caps_children"><h2>აირჩიეთ ერთი ობიექტი</h2></div>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+
+        <div>
+            <md-input-container>
+                <label>{{::field.label}}</label>
+                <md-select ng-model="selected" ng-required="true">
+                    <md-option><em>None</em></md-option>
+                    <md-option ng-repeat="rec in features" ng-value="rec.id">{{::dictionary[rec.name]}} - {{rec.id}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <md-dialog-actions layout="row">
+            <!--generalForm.$valid-->
+
+            <md-button class="md-raised md-primary" ng-click="save()" ng-show="true">
+                არჩევა
+            </md-button>
+        </md-dialog-actions>
+
+
+    </md-dialog-content>
+
+</md-dialog>

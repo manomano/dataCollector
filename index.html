@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html ng-strict-di>
+<head>
+    <!--<base href="/">-->
+    <base href="/dataCollection/">
+    <meta charset="utf-8">
+
+    <title>Data collection for maps</title>
+    <meta name="theme-color" content="#4f81bd">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+    <link rel="stylesheet" type="text/css" href='//fonts.googleapis.com/css?family=Roboto|Roboto+Condensed'>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <!--build:css assets/css/styles.min.css-->
+    <link rel="stylesheet" type="text/css" href="Content/ol/ol.css">
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/angular-loading-bar/src/loading-bar.css">
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/bpg-arial/css/bpg-arial.css">
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/bpg-arial-caps/css/bpg-arial-caps.css">
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/ng-notify/src/styles/ng-notify.css">
+
+
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/angular-material-time-picker/dist/md-time-picker.css">
+    <link rel="stylesheet" type="text/css" href="Content/bower_components/ng-image-gallery/dist/ng-image-gallery.css">
+
+
+    <link rel="stylesheet" href="Content/css/style.css">
+    <!-- endbuild -->
+
+    <!--build:js dataCollection.min.js -->
+    <script src="Content/ol/ol.js"></script>
+    <script src="App/olClasses/Action.js"></script>
+    <script src="App/olClasses/Styles.js"></script>
+    <script src="App/olClasses/DummyClasses.js"></script>
+    <script src="App/olClasses/Utils.js"></script>
+
+
+
+
+    <script src="App/olClasses/layers/Layers.js"></script>
+    <script src="App/olClasses/layers/LayerUtils.js"></script>
+    <script src="App/olClasses/layers/DefaultLayers.js"></script>
+
+    <script src="App/olClasses/layers/DataGatheringLayers/DataGatheringLayers.js"></script>
+    <script src="App/olClasses/layers/DataGatheringLayers/DataGatheringLayerURLGetter.js"></script>
+    <script src="App/olClasses/layers/DataGatheringLayers/NGCACHEDataGatheringLayers.js"></script>
+    <script src="App/olClasses/layers/DataGatheringLayers/WFSDataGatheringLayers.js"></script>
+    <script src="App/olClasses/layers/DataGatheringLayers/WMSDataGatheringLayers.js"></script>
+
+    <script src="App/olClasses/layers/AssignmentLayers/AssignmentLayers.js"></script>
+    <script src="App/olClasses/layers/AssignmentLayers/AssignmentLayerUrlGetter.js"></script>
+    <script src="App/olClasses/layers/AssignmentLayers/NGCACHEAssignmentLayer.js"></script>
+    <script src="App/olClasses/layers/AssignmentLayers/WFSAssignmentLayers.js"></script>
+    <script src="App/olClasses/layers/AssignmentLayers/WMSAssignmentLayers.js"></script>
+
+    <script src="App/olClasses/layers/OperatorLayers.js"></script>
+    <script src="App/olClasses/layers/AdminOperatorLayers.js"></script>
+    <script src="App/olClasses/layers/PoiPebeOperatorLayers.js"></script>
+    <script src="App/olClasses/layers/TrafficSignOperatorLayers.js"></script>
+
+
+    <script src="App/olClasses/mapControllers/MapController.js"></script>
+
+
+
+    <script src="App/olClasses/InteractionTools/FeatureSelectors/FeatureSelector.js"></script>
+    <script src="App/olClasses/InteractionTools/FeatureSelectors/WMSFeatureSelector.js"></script>
+    <script src="App/olClasses/InteractionTools/FeatureSelectors/WFSFeatureSelector.js"></script>
+    <script src="App/olClasses/InteractionTools/FeatureSelectors/FeatureSelectorController.js"></script>
+
+
+    <script src="App/olClasses/InteractionTools/FeatureDrawer.js"></script>
+    <script src="App/olClasses/InteractionTools/FeatureEditor.js"></script>
+    <script src="App/olClasses/InteractionTools/Measurer.js"></script>
+    <script src="App/olClasses/InteractionTools/UserLocator.js"></script>
+
+    <script src="App/olClasses/InteractionTools/OnClickFeatureGetter.js"></script>
+    <script src="App/olClasses/InteractionTools/OnSelectFeatureChooser.js"></script>
+    <script src="App/olClasses/InteractionTools/PointAssigmentDrawer.js"></script>
+    <script src="App/olClasses/InteractionTools/PopUpWindowCaller.js"></script>
+    <script src="App/olClasses/InteractionTools/WFSInfoMarker.js"></script>
+
+
+    <script src="Content/bower_components/angular/angular.js"></script>
+    <script src="Content/bower_components/angular-material/angular-material.js"></script>
+    <script src="Content/bower_components/angular-route/angular-route.js"></script>
+    <script src="Content/bower_components/angular-messages/angular-messages.js"></script>
+    <script src="Content/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="Content/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="Content/bower_components/satellizer/dist/satellizer.js"></script>
+
+    <script src="Content/bower_components/angular-material-time-picker/dist/md-time-picker.js"></script>
+
+
+    <script src="Content/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="Content/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script src="Content/bower_components/ng-notify/src/scripts/ng-notify.js"></script>
+    <script src="Content/bower_components/ng-image-gallery/dist/ng-image-gallery.js"></script>
+
+
+
+    <script src="Content/bower_components/jquery/dist/jquery.js"></script>
+
+
+
+    <script src="Content/bower_components/angular-i18n/angular-locale_ka.js"></script>
+
+    <script src="App/mainModule.js"></script>
+
+
+    <script src="App/_Services/services_module.js"></script>
+    <script src="App/_Services/storage_service.js"></script>
+    <script src="App/_Services/messaging_service.js"></script>
+    <script src="App/_Services/parcelCrud.js"></script>
+    <script src="App/_Services/stepService.js"></script>
+    <script src="App/_Services/simpleObjectService.js"></script>
+
+
+    <script src="App/_Directives/directives_module.js"></script>
+    <script src="App/_Directives/dynamic_form.js"></script>
+    <script src="App/_Directives/plus.js"></script>
+
+
+    <script src="App/Authentication/authentication_module.js"></script>
+    <script src="App/Authentication/authentication_service.js"></script>
+    <script src="App/Authentication/AuthenticationCtrl.js"></script>
+
+    <script src="App/Panel/panelModule.js"></script>
+    <script src="App/Panel/panelCtrl.js"></script>
+    <script src="App/controllers/FormCtrl.js"></script>
+    <script src="App/controllers/FormHiCtrl.js"></script>
+    <script src="App/controllers/infoCtrl.js"></script>
+    <script src="App/controllers/drawingController.js"></script>
+    <script src="App/controllers/flowController.js"></script>
+    <script src="App/controllers/initialController.js"></script>
+    <script src="App/controllers/parcelController.js"></script>
+    <script src="App/controllers/parcelEntranceController.js"></script>
+    <script src="App/controllers/buildingController.js"></script>
+    <script src="App/controllers/buildingEntranceController.js"></script>
+    <script src="App/controllers/assignmentFormController.js"></script>
+    <script src="App/controllers/assignmentErrorsController.js"></script>
+    <script src="App/controllers/simpleObjectController.js"></script>
+    <script src="App/controllers/assignmentInfoCtrl.js"></script>
+    <script src="App/controllers/editOptionsController.js"></script>
+    <script src="App/controllers/selectOneFeature.js"></script>
+
+    <script src="App/stats/StatisticsCtrl.js"></script>
+
+
+
+    <script src="App/Panel/ToastCtrl.js"></script>
+
+
+    <script src="App/config.js"></script>
+    <!-- endbuild -->
+
+</head>
+<body>
+
+<div id="map" style="height: 100%; width:100%"></div>
+
+<div data-ng-app="datacollection.main" data-ng-view>
+    <div id="popupContainer"></div>
+
+
+</div>
+<script type="javascript">
+
+
+</script>
+</body>
+</html>

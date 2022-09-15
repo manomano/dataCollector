@@ -1,0 +1,23 @@
+<md-dialog aria-label="შეცდომების სტატისტიკა">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div class="caps_children"><h2>დავალებები: {{type}}</h2></div>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+
+            <div ng-repeat="rec in fields" layout="row" class="label">
+                <div flex="70">{{rec.label}}:</div>
+                <div flex="60">{{rec.value}}</div>
+            </div>
+
+
+
+
+    </md-dialog-content>
+
+</md-dialog>

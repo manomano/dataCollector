@@ -1,0 +1,37 @@
+<md-dialog aria-label="ფორმა">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div class="caps_children"><h2>დავალების გაცემა</h2></div>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+
+        <div ng-repeat="rec in info" layout="row" class="label">
+            <div flex="60">{{rec.key}}:</div>
+            <div flex="10">{{rec.value}}</div>
+        </div>
+
+        <form name="assignmentForm">
+            <div>
+                <md-input-container>
+                    <label>მომხმარებელი</label>
+                    <md-select ng-model="user_id" ng-required="true" >
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="rec in users" ng-value="rec.userID">{{rec.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button class="md-raised md-primary" ng-click="save()" ng-show="assignmentForm.$valid">
+            დამახსოვრება
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

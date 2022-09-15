@@ -1,0 +1,33 @@
+<md-dialog aria-label="ფორმა">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div class="caps_children"><h2>რედაქტირება</h2></div>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+        <form name="optionsForm">
+            <div>
+                <md-input-container>
+                    <md-radio-group ng-model="theOption">
+
+                        <md-radio-button value="geometry" class="md-primary">გეომეტრია</md-radio-button>
+                        <md-radio-button value="metadata"> ინფორმაცია</md-radio-button>
+                        <md-radio-button value="delete">წაშლა</md-radio-button>
+
+                    </md-radio-group>
+                </md-input-container>
+            </div>
+
+
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <md-button class="md-raised md-primary" ng-click="save()" ng-show="optionsForm.$valid">
+            დამახსოვრება
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

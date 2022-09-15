@@ -1,0 +1,69 @@
+<md-dialog aria-label="შეცდომების სტატისტიკა">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <div class="caps_children"><h2>შეცდომების სტატისტიკა:  {{titles[serviceName]}}</h2></div>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+
+        <div ng-repeat="rec in parcelErrorList">
+            პრობლემური ნაკვეთები
+            <md-button ng-show="true" class="md-primary"
+                       ng-click="goTo(rec, 'parcels')" aria-label="დათვალიერება">
+                <i class="material-icons">directions</i> ნაკვეთის ID {{rec}}
+            </md-button>
+        </div>
+
+        <div ng-repeat="rec in MUST_BE_COPIED">
+            დაუკოპირებელი ნაკვეთი
+            <md-button ng-show="true" class="md-primary"
+                       ng-click="goTo(rec,'existingParcels')" aria-label="დათვალიერება">
+                <i class="material-icons">directions</i> არსებული ნაკვეთის ID {{rec}}
+            </md-button>
+        </div>
+
+
+        <div ng-repeat="rec in MULTIPLE_TIMES_COPIED">
+            დაკოპირებელი ნაკვეთი
+            <md-button ng-show="true" class="md-primary"
+                       ng-click="goTo(rec.existingParcelId,'existingParcels')" aria-label="დათვალიერება">
+                <i class="material-icons">directions</i> არსებული ნაკვეთის ID {{rec.existingParcelId}} :
+            </md-button>
+
+            <md-button ng-repeat="parcelId in rec.parcelIds" ng-show="true" class="md-primary"
+                       ng-click="goTo(parcelId,'parcels')" aria-label="დათვალიერება">
+                <i class="material-icons">directions</i> ნაკვეთის ID {{parcelId}}
+            </md-button>
+        </div>
+
+
+        <div ng-repeat="rec in busStopErrorList">
+            <md-button ng-show="true" class="md-primary"
+                       ng-click="goTo(rec, 'busStops')" aria-label="დათვალიერება">
+                <i class="material-icons">directions</i> ავტობუსის გაჩერების ID {{rec}}
+            </md-button>
+        </div>
+
+
+        <div ng-repeat="rec in trafficSignErrorList">
+            <md-button ng-show="true" class="md-primary"
+                       ng-click="goTo(rec, 'trafficSigns')" aria-label="დათვალიერება">
+                <i class="material-icons">directions</i> საგზაო ნიშნის ID {{rec}}
+            </md-button>
+        </div>
+
+
+
+        <div ng-if="$scope.allErrors">
+            <h2>ამ დავალებაში შეცდომები არ მოიძებნა</h2>
+        </div>
+
+
+
+    </md-dialog-content>
+
+</md-dialog>

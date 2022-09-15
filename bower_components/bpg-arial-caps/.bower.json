@@ -1,0 +1,48 @@
+{
+  "name": "bpg-arial-caps",
+  "description": "BPG Arial Caps Web-Font Package",
+  "version": "1.0.1",
+  "keywords": [
+    "ttf",
+    "woff",
+    "woff2",
+    "svg",
+    "font",
+    "web-font",
+    "bpg-arial-caps"
+  ],
+  "main": [
+    "css/bpg-arial-caps.css"
+  ],
+  "homepage": "https://github.com/web-fonts/bpg-arial-caps",
+  "authors": [
+    "Lado Lomidze <lado.lomidze@gmail.com>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/web-fonts/bpg-arial-caps.git"
+  },
+  "license": [
+    "MIT",
+    "CC-BY-NC-ND-4.0"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "*.md",
+    "font.json",
+    "package.json"
+  ],
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.1",
+    "commit": "c90c715abd3b2dd1735fd83c1f87231152e0f5fb"
+  },
+  "_source": "https://github.com/web-fonts/bpg-arial-caps.git",
+  "_target": "^1.0.1",
+  "_originalSource": "bpg-arial-caps"
+}
