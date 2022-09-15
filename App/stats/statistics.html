@@ -1,76 +1,88 @@
 <md-dialog aria-label="შეცდომების სტატისტიკა">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <div class="caps_children"><h2>სტატისტიკა</h2></div>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon>close</md-icon>
-            </md-button>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div class="caps_children"><h2>სტატისტიკა</h2></div>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon>close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-padding>
+    <form name="statisticParameters">
+      <div layout="row">
+        <div>
+          <md-input-container>
+            <label>პროექტი</label>
+            <md-select ng-model="params.place" placeholder="პროექტი">
+              <md-option>dada</md-option>
+              <md-option ng-repeat="place in places" ng-value="place.id"
+                >{{place.geoName}}</md-option
+              >
+            </md-select>
+          </md-input-container>
         </div>
-    </md-toolbar>
-    <md-dialog-content layout-padding>
-        <form name="statisticParameters">
-            <div layout="row">
+        <div flex="15">
+          <md-input-container>
+            <label> -დან</label>
+            <md-datepicker
+              ng-model="fromField"
+              md-placeholder="Enter date"
+              md-placeholder="დან"
+            ></md-datepicker>
+          </md-input-container>
+        </div>
+        <div flex="15">
+          <md-input-container>
+            <label> -მდე</label>
+            <md-datepicker
+              ng-model="tillField"
+              md-placeholder="Enter date"
+              md-placeholder="მდე"
+            ></md-datepicker>
+          </md-input-container>
+        </div>
 
-                <div >
-                    <md-input-container>
-                        <label>პროექტი</label>
-                        <md-select ng-model="params.place" placeholder="პროექტი">
-                            <md-option>dada</md-option>
-                            <md-option ng-repeat="place in places" ng-value="place.id">{{place.geoName}}</md-option>
-                        </md-select>
-                    </md-input-container>
-                </div>
-                <div flex="15">
-                    <md-input-container>
-                        <label> -დან</label>
-                        <md-datepicker ng-model="fromField" md-placeholder="Enter date" md-placeholder="დან"></md-datepicker>
-                    </md-input-container>
-                </div>
-                <div flex="15">
-                    <md-input-container>
-                        <label> -მდე</label>
-                        <md-datepicker ng-model="tillField" md-placeholder="Enter date" md-placeholder="მდე"></md-datepicker>
-                    </md-input-container>
-                </div>
-
-                <div flex="20">
-                    <md-input-container>
-                        <label>GROUP ID</label>
-                    <input type="number" ng-model="params.group" md-placeholder="groupID" md-maxlength="2" md-minLength="1">
-                    </md-input-container>
-                </div>
-                <div flex="10">
-                <md-button class="md-primary md-raised" ng-click="getData()">დაგენერირება</md-button>
-                </div>
-            </div>
-        </form>
-        <table class="caps table">
-            <tr>
-                <th>სახელი</th>
-                <th>გვარი</th>
-                <th>დასრულებული ნაკვეთები</th>
-                <th>დაუდგენელი მფლობელები</th>
-                <th>დასრულებული შენობები</th>
-                <th>დასრულებული POI</th>
-                <th>დასრულებული საზგაო ნიშნები</th>
-                <th>დასრულებული ავტობუსის გაჩერებები</th>
-            </tr>
-            <tr ng-repeat="rec in data">
-                <td>{{rec.name}}</td>
-                <td>{{rec.surname}}}</td>
-                <td>{{rec.completed_parcel}}</td>
-                <td>{{rec.unidentified_owner}}</td>
-                <td>{{rec.completed_building}}</td>
-                <td>{{rec.completed_poi}}</td>
-                <td>{{rec.completed_sign}}</td>
-                <td>{{rec.completed_bus}}</td>
-            </tr>
-
-        </table>
-
-
-
-    </md-dialog-content>
-
+        <div flex="20">
+          <md-input-container>
+            <label>GROUP ID</label>
+            <input
+              type="number"
+              ng-model="params.group"
+              md-placeholder="groupID"
+              md-maxlength="2"
+              md-minLength="1"
+            />
+          </md-input-container>
+        </div>
+        <div flex="10">
+          <md-button class="md-primary md-raised" ng-click="getData()"
+            >დაგენერირება</md-button
+          >
+        </div>
+      </div>
+    </form>
+    <table class="caps table">
+      <tr>
+        <th>სახელი</th>
+        <th>გვარი</th>
+        <th>დასრულებული ნაკვეთები</th>
+        <th>დაუდგენელი მფლობელები</th>
+        <th>დასრულებული შენობები</th>
+        <th>დასრულებული POI</th>
+        <th>დასრულებული საზგაო ნიშნები</th>
+        <th>დასრულებული ავტობუსის გაჩერებები</th>
+      </tr>
+      <tr ng-repeat="rec in data">
+        <td>{{rec.name}}</td>
+        <td>{{rec.surname}}}</td>
+        <td>{{rec.completed_parcel}}</td>
+        <td>{{rec.unidentified_owner}}</td>
+        <td>{{rec.completed_building}}</td>
+        <td>{{rec.completed_poi}}</td>
+        <td>{{rec.completed_sign}}</td>
+        <td>{{rec.completed_bus}}</td>
+      </tr>
+    </table>
+  </md-dialog-content>
 </md-dialog>

@@ -1,19 +1,29 @@
 <div>
-    <div layout="column">
-        <div layout="row" ng-repeat="rec in data">
-            <md-input-container ng-style="{'width':'500px'}">
-                <label>სახელი,გვარი </label>
-                <input ng-required="true"
-                       type="text"
-                       ng-model ="rec.OWNER"
-                       aria-label="სახელი, გვარი">
-            </md-input-container>
-            <md-button class="md-fab md-primary" aria-label="add" ng-click="addElement()">
-                <md-icon>add</md-icon>
-            </md-button>
-            <md-button class="md-fab md-primary" aria-label="remove" ng-click="removeElement($index)">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </div>
+  <div layout="column">
+    <div layout="row" ng-repeat="rec in data">
+      <md-input-container ng-style="{'width':'500px'}">
+        <label>სახელი,გვარი </label>
+        <input
+          ng-required="true"
+          type="text"
+          ng-model="rec.OWNER"
+          aria-label="სახელი, გვარი"
+        />
+      </md-input-container>
+      <md-button
+        class="md-fab md-primary"
+        aria-label="add"
+        ng-click="addElement()"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
+      <md-button
+        class="md-fab md-primary"
+        aria-label="remove"
+        ng-click="removeElement($index)"
+      >
+        <md-icon>delete</md-icon>
+      </md-button>
     </div>
+  </div>
 </div>

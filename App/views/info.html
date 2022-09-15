@@ -1,47 +1,48 @@
 <md-dialog aria-label="ფორმა">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <div class="caps_children"><h2>ინფორმაცია {{FormTitle}} შესახებ </h2></div>
-            <span flex></span>
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-dialog-content layout-padding>
-        <div ng-show="id">ID-{{id}}</div>
-        <div ng-repeat="rec in fields" layout="row" class="label">
-            <div flex="80">{{rec.label}}:</div>
-            <div flex="40">{{rec.value}}</div>
-            <div flex="30"  ng-if="actualChildElementsNum.hasOwnProperty(rec.name)">
-                ფაქტ. რაოდ. {{actualChildElementsNum[rec.name]}}
-            </div>
-        </div>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div class="caps_children"><h2>ინფორმაცია {{FormTitle}} შესახებ</h2></div>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon>close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content layout-padding>
+    <div ng-show="id">ID-{{id}}</div>
+    <div ng-repeat="rec in fields" layout="row" class="label">
+      <div flex="80">{{rec.label}}:</div>
+      <div flex="40">{{rec.value}}</div>
+      <div flex="30" ng-if="actualChildElementsNum.hasOwnProperty(rec.name)">
+        ფაქტ. რაოდ. {{actualChildElementsNum[rec.name]}}
+      </div>
+    </div>
 
-        <div>
-            <!--<div ng-repeat="rec in photoURLArr">
+    <div>
+      <!--<div ng-repeat="rec in photoURLArr">
                 <div ng-class="rec.isThumbNail?'thumbnail_custom':'fullScreenMode'" ng-click="rec.isThumbNail=!rec.isThumbNail" ng-style="{'background-image':'url({{rec.url}})'}"></div>
             </div>-->
-            <!--<img ng-repeat="rec in photoURLArr" ng-src="{{rec.url}}" width="200" style="margin: 5px">-->
+      <!--<img ng-repeat="rec in photoURLArr" ng-src="{{rec.url}}" width="200" style="margin: 5px">-->
 
-            <div ng-image-gallery
-                 images="images"
-                 methods="methods"
-                 conf="conf"
-                 thumbnails="thumbnails"
-                 thumb-size="150"
+      <div
+        ng-image-gallery
+        images="images"
+        methods="methods"
+        conf="conf"
+        thumbnails="thumbnails"
+        thumb-size="150"
+        bg-close="bgClose"
+        piracy="true"
+        on-open="opened();"
+        on-close="closed();"
+        bg-close="false"
+      ></div>
 
-                 bg-close="bgClose"
-                 piracy="true"
-                 on-open="opened();"
-                 on-close="closed();"
-                 bg-close="false"></div>
-
-         <!--   inline="inline"
+      <!--   inline="inline"
             bubbles="bubbles"
             height="500"
 
             img-bubbles="imgBubbles"-->
-        </div>
-    </md-dialog-content>
+    </div>
+  </md-dialog-content>
 </md-dialog>

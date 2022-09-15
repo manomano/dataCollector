@@ -1,17 +1,17 @@
 <md-dialog aria-label="ფორმა">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <div class="caps_children"><h2>{{FormTitle}}</h2></div>
-            <span flex></span>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <div class="caps_children"><h2>{{FormTitle}}</h2></div>
+      <span flex></span>
 
-            <md-button class="md-icon-button" ng-click="cancel()">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    <form name="generalForm" ng-submit="save(generalForm.$valid)" novalidate >
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon>close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <form name="generalForm" ng-submit="save(generalForm.$valid)" novalidate>
     <md-dialog-content layout-padding>
-        <!--<div ng-repeat="rec in ::existingParcelProperties" ng-show="existingParcelProperties.length >0 ">
+      <!--<div ng-repeat="rec in ::existingParcelProperties" ng-show="existingParcelProperties.length >0 ">
             <label>{{::rec.key}}:</label>
             <span>{{::rec.value}}</span>
         </div>
@@ -19,57 +19,98 @@
         <md-divider></md-divider>
     -->
 
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          flex-flow: row wrap;
+          width: 666px;
+        "
+      >
+        <div ng-repeat="field in fields track by $index">
+          <div
+            ng-if="field.type=='CATEGORY_SELECT_FIELD'"
+            ng-show="field.items.length>0"
+            class="item_width"
+          >
+            <md-input-container>
+              <label>{{field.label}} </label>
+              <md-select
+                name="field.name"
+                style="width: 220px"
+                ng-model="field.model"
+                ng-required="true"
+                ng-change="category_change(field.model,$index, field )"
+              >
+                <md-option ng-value="0"><em>None</em></md-option>
+                <md-option ng-repeat="rec in field.items" ng-value="rec.id"
+                  >{{::rec.geoName}}
+                </md-option>
+              </md-select>
+              <span
+                class="text-error"
+                ng-show="generalForm.submitted && generalForm[field.name].$error.required"
+                >this is required</span
+              >
+            </md-input-container>
+          </div>
 
-            <div style="display: flex;flex-direction: row;flex-flow: row wrap; width:666px;">
+          <div
+            ng-if="field.type=='SELECT_FIELD'"
+            ng-show="showHide(field)"
+            class="item_width"
+          >
+            <md-input-container>
+              <label>{{::field.label}}</label>
+              <md-select
+                style="width: 220px"
+                ng-model="field.model"
+                ng-required="field.required==2 && field.items.length>0"
+              >
+                <md-option ng-value="0"><em>None</em></md-option>
+                <md-option ng-repeat="rec in field.items" ng-value="rec.value"
+                  >{{::rec.label}}</md-option
+                >
+              </md-select>
+              <span
+                class="text-error"
+                ng-show="generalForm.submitted && generalForm[field.name].$error.required"
+                >this is required</span
+              >
+              <div
+                class="mandatory"
+                ng-show="field.required==1 && !!!field.model"
+              >
+                პირობითად სავალდებულო ველი
+              </div>
+            </md-input-container>
+          </div>
 
+          <div ng-if="field.type=='TEXT_FIELD'" class="item_width">
+            <md-input-container>
+              <label>{{::field.label}}</label>
+              <input
+                autocomplete="off"
+                style="width: inherit"
+                name="field.id"
+                ng-model="field.model"
+                ng-required="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)"
+              />
+              <span
+                class="text-error"
+                ng-show="generalForm.submitted && generalForm[field.name].$error.required"
+                >this is required</span
+              >
+              <div
+                class="mandatory"
+                ng-show="field.required==1 && !!!field.model"
+              >
+                პირობითად სავალდებულო ველი
+              </div>
+            </md-input-container>
+          </div>
 
-                <div ng-repeat="field in fields track by $index">
-                    <div ng-if="field.type=='CATEGORY_SELECT_FIELD'" ng-show="field.items.length>0" class="item_width">
-                        <md-input-container>
-                            <label>{{field.label}}  </label>
-                            <md-select name="field.name" style="width:220px" ng-model="field.model" ng-required="true"
-                                       ng-change="category_change(field.model,$index, field )">
-                                <md-option ng-value="0"><em>None</em></md-option>
-                                <md-option ng-repeat="rec in field.items" ng-value="rec.id">{{::rec.geoName}}
-                                </md-option>
-                            </md-select>
-                            <span class="text-error" ng-show="generalForm.submitted && generalForm[field.name].$error.required">this is required</span>
-                        </md-input-container>
-                    </div>
-
-
-                    <div ng-if="field.type=='SELECT_FIELD'" ng-show="showHide(field)" class="item_width">
-                        <md-input-container>
-                            <label>{{::field.label}}</label>
-                            <md-select style="width:220px" ng-model="field.model" ng-required="field.required==2 && field.items.length>0">
-                                <md-option ng-value="0"><em>None</em></md-option>
-                                <md-option ng-repeat="rec in field.items" ng-value="rec.value">{{::rec.label}}</md-option>
-                            </md-select>
-                            <span class="text-error" ng-show="generalForm.submitted && generalForm[field.name].$error.required">this is required</span>
-                            <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                                ველი
-                            </div>
-                        </md-input-container>
-                    </div>
-
-                    <div ng-if="field.type=='TEXT_FIELD'" class="item_width">
-                        <md-input-container>
-                            <label>{{::field.label}}</label>
-                            <input  autocomplete="off" style="width: inherit" name="field.id" ng-model="field.model"
-                                   ng-required="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)">
-                            <span class="text-error" ng-show="generalForm.submitted && generalForm[field.name].$error.required">this is required</span>
-                            <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                                ველი
-                            </div>
-                        </md-input-container>
-                    </div>
-
-
-
-
-
-
-                    <!--<div ng-if="field.type=='PHONE_FIELD'" ng-show="showHide(field)" class="item_width">
+          <!--<div ng-if="field.type=='PHONE_FIELD'" ng-show="showHide(field)" class="item_width">
                         <md-input-container>
                             <label>{{::field.label}}</label>
 
@@ -86,137 +127,207 @@
                     </div>
 -->
 
+          <div
+            ng-if="field.type=='PHONE_FIELD'"
+            class="item_width"
+            style="width: 664px; height: 98px; overflow-y: scroll"
+          >
+            <repetitive-phones rows="field.model"></repetitive-phones>
+          </div>
 
-                    <div ng-if="field.type=='PHONE_FIELD'" class="item_width" style="width:664px; height: 98px; overflow-y:scroll ">
+          <div
+            ng-if="field.type=='ONLYNUMBERS_FIELD'"
+            ng-show="showHide(field)"
+            class="item_width"
+          >
+            <md-input-container>
+              <label>{{::field.label}}</label>
 
-                        <repetitive-phones rows="field.model" ></repetitive-phones>
+              <input
+                ng-required="field.required==2"
+                type="text"
+                name="field.id"
+                ng-model="field.model"
+                ng-pattern="/^[0-9]+$/"
+              />
 
-                    </div>
+              <div
+                class="mandatory"
+                ng-show="field.required==1 && !!!field.model"
+              >
+                პირობითად სავალდებულო ველი
+              </div>
+            </md-input-container>
+          </div>
 
+          <div ng-if="field.type=='NUMBER_FIELD'" class="item_width">
+            <md-input-container>
+              <label>{{::field.label}}</label>
+              <input
+                autocomplete="off"
+                ng-min="field.required==2?0:(field.required==3?1:null)"
+                style="width: inherit"
+                type="number"
+                min="0"
+                name="field.id"
+                ng-model="field.model"
+                ng-required="([2,3].indexOf(field.required)>=0 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0))"
+              />
 
+              <span
+                class="text-error"
+                ng-show="generalForm.submitted && generalForm[field.name].$error.required"
+                >this is required</span
+              >
 
-                    <div ng-if="field.type=='ONLYNUMBERS_FIELD'" ng-show="showHide(field)" class="item_width">
-                        <md-input-container>
-                            <label>{{::field.label}}</label>
+              <div
+                class="mandatory"
+                ng-show="field.required==1 && !!!field.model"
+              >
+                პირობითად სავალდებულო ველი
+              </div>
+            </md-input-container>
+          </div>
 
-                            <input ng-required="field.required==2"
-                                   type="text"
-                                   name="field.id"
-                                   ng-model="field.model"
-                                   ng-pattern="/^[0-9]+$/" >
+          <div ng-if="field.type=='DATE_FIELD'" class="item_width">
+            <label>{{::field.label}}</label>
+            <md-datepicker
+              ng-model="field.model"
+              md-placeholder="Enter date"
+              md-open-on-focus
+              ng-required="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)"
+            ></md-datepicker>
+            <span
+              class="text-error"
+              ng-show="generalForm.submitted && generalForm[field.name].$error.required"
+              >this is required</span
+            >
+            <div
+              class="mandatory"
+              ng-show="field.required==1 && !!!field.model"
+            >
+              პირობითად სავალდებულო ველი
+            </div>
+          </div>
 
-                            <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                                ველი
-                            </div>
-                        </md-input-container>
-                    </div>
+          <div
+            ng-if="field.type=='GEOTEXT_FIELD'"
+            ng-show="showHide(field)"
+            class="item_width"
+          >
+            <md-input-container>
+              <label>{{::field.label}}</label>
+              <input
+                autocomplete="off"
+                style="width: inherit"
+                name="field.id"
+                ng-model="field.model"
+                ng-pattern="/^[ა-ჰ]+$/"
+                ng-required="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)"
+              />
+              <span
+                class="text-error"
+                ng-show="generalForm.submitted && generalForm[field.name].$error.required"
+                >this is required</span
+              >
+              <div
+                class="mandatory"
+                ng-show="field.required==1 && !!!field.model"
+              >
+                პირობითად სავალდებულო ველი
+              </div>
+            </md-input-container>
+          </div>
 
-
-
-
-
-
-
-
-
-
-
-
-                    <div ng-if="field.type=='NUMBER_FIELD'"  class="item_width">
-                        <md-input-container>
-                            <label>{{::field.label}}</label>
-                            <input  autocomplete="off" ng-min="field.required==2?0:(field.required==3?1:null)" style="width: inherit" type="number" min="0" name="field.id" ng-model="field.model"
-                                   ng-required="([2,3].indexOf(field.required)>=0 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0))">
-
-                            <span class="text-error" ng-show="generalForm.submitted && generalForm[field.name].$error.required">this is required</span>
-
-                            <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                                ველი
-                            </div>
-                        </md-input-container>
-                    </div>
-
-
-                    <div ng-if="field.type=='DATE_FIELD'" class="item_width">
-                        <label>{{::field.label}}</label>
-                        <md-datepicker ng-model="field.model" md-placeholder="Enter date" md-open-on-focus
-                                       ng-required="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)"></md-datepicker>
-                        <span class="text-error" ng-show="generalForm.submitted && generalForm[field.name].$error.required">this is required</span>
-                        <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                            ველი
-                        </div>
-
-                    </div>
-
-
-                    <div ng-if="field.type=='GEOTEXT_FIELD'" ng-show="showHide(field)" class="item_width">
-                        <md-input-container>
-                            <label>{{::field.label}}</label>
-                            <input  autocomplete="off" style="width: inherit" name="field.id" ng-model="field.model" ng-pattern="/^[ა-ჰ]+$/"
-                                    ng-required="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)">
-                            <span class="text-error" ng-show="generalForm.submitted && generalForm[field.name].$error.required">this is required</span>
-                            <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                                ველი
-                            </div>
-                        </md-input-container>
-                    </div>
-
-
-
-                    <div ng-if="field.type=='TIME_FIELDS'" ng-show="showHide(field)" class="item_width">
-                        <div id="timefieldframe">
-                            <p id="inside">{{::field.label}}</p>
-                        </div>
-                        <div ng-style="{position:'relative'}">
-                            <div ng-style="{position:'absolute', top:'-6px',left:'130px','z-index':2000,'font-size':'10px'}">
-                                <md-checkbox  ng-change="ifChecked(field)" md-no-ink=""  ng-click="" ng-checked="field.is24" ng-true-value="'24:00_00:00'"  ng-false-value="null" aria-label="Checkbox No Ink" ng-model="field.model" class="md-primary">24სთ-იანი</md-checkbox>
-
-                            </div>
-                        </div>
-
-                        <div ng-show="!field.model">
-                            <md-time-picker  style="height:30px" ng-model="field.times.from" message="message" read-only="readonly" mandatory="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)" no-meridiem no-auto-switch></md-time-picker>
-                            <md-time-picker style="height:30px" ng-model="field.times.to"  message="message" read-only="readonly" mandatory="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)" no-meridiem no-auto-switch></md-time-picker>
-                        </div>
-                        <div class="mandatory" ng-show="field.required==1 && !!!field.model">პირობითად სავალდებულო
-                            ველი
-                        </div>
-
-
-                    </div>
-
-
-
-
-
-                </div>
-
-
+          <div
+            ng-if="field.type=='TIME_FIELDS'"
+            ng-show="showHide(field)"
+            class="item_width"
+          >
+            <div id="timefieldframe">
+              <p id="inside">{{::field.label}}</p>
+            </div>
+            <div ng-style="{position:'relative'}">
+              <div
+                ng-style="{position:'absolute', top:'-6px',left:'130px','z-index':2000,'font-size':'10px'}"
+              >
+                <md-checkbox
+                  ng-change="ifChecked(field)"
+                  md-no-ink=""
+                  ng-click=""
+                  ng-checked="field.is24"
+                  ng-true-value="'24:00_00:00'"
+                  ng-false-value="null"
+                  aria-label="Checkbox No Ink"
+                  ng-model="field.model"
+                  class="md-primary"
+                  >24სთ-იანი</md-checkbox
+                >
+              </div>
             </div>
 
-        <div ng-if="fields[fields.length-1].type=='TEXTAREA_FIELD'" ng-show="showHide(fields[fields.length-1])" >
-            <label>{{::fields[fields.length-1].label}}</label>
-            <md-input-container>
-                <textarea  aria-label="comment" name="fields[fields.length-1].id" ng-model="fields[fields.length-1].model" rows="4" cols="75"></textarea>
-
-                <div class="mandatory" ng-show="fields[fields.length-1].required==1 && !!!fields[fields.length-1].model">პირობითად სავალდებულო
-                    ველი
-                </div>
-            </md-input-container>
+            <div ng-show="!field.model">
+              <md-time-picker
+                style="height: 30px"
+                ng-model="field.times.from"
+                message="message"
+                read-only="readonly"
+                mandatory="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)"
+                no-meridiem
+                no-auto-switch
+              ></md-time-picker>
+              <md-time-picker
+                style="height: 30px"
+                ng-model="field.times.to"
+                message="message"
+                read-only="readonly"
+                mandatory="field.required==2 && (!field.parentId || treeIdies.indexOf(field.parentId)>=0)"
+                no-meridiem
+                no-auto-switch
+              ></md-time-picker>
+            </div>
+            <div
+              class="mandatory"
+              ng-show="field.required==1 && !!!field.model"
+            >
+              პირობითად სავალდებულო ველი
+            </div>
+          </div>
         </div>
+      </div>
 
+      <div
+        ng-if="fields[fields.length-1].type=='TEXTAREA_FIELD'"
+        ng-show="showHide(fields[fields.length-1])"
+      >
+        <label>{{::fields[fields.length-1].label}}</label>
+        <md-input-container>
+          <textarea
+            aria-label="comment"
+            name="fields[fields.length-1].id"
+            ng-model="fields[fields.length-1].model"
+            rows="4"
+            cols="75"
+          ></textarea>
 
+          <div
+            class="mandatory"
+            ng-show="fields[fields.length-1].required==1 && !!!fields[fields.length-1].model"
+          >
+            პირობითად სავალდებულო ველი
+          </div>
+        </md-input-container>
+      </div>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
-        <!--generalForm.$valid-->
-        <!--{{generalForm.$valid}}-->
-        <!--ng-disabled="generalForm.$invalid"-->
+      <!--generalForm.$valid-->
+      <!--{{generalForm.$valid}}-->
+      <!--ng-disabled="generalForm.$invalid"-->
 
-
-        <md-button type="submit"  class="md-raised md-primary"  >
-            დამახსოვრება
-        </md-button>
+      <md-button type="submit" class="md-raised md-primary">
+        დამახსოვრება
+      </md-button>
     </md-dialog-actions>
-    </form>
+  </form>
 </md-dialog>

@@ -1,23 +1,32 @@
 <div>
-    <div layout="column">
-        <div layout="row" ng-repeat="rec in rows">
-            <md-input-container>
-                <label>მობილური</label>
-                <input  ng-required="true"
-                       type="text"
-                       ng-model ="rec.phone"
-                       aria-label="მობილური"
-                        ng-blur="verifyDuplicate(this, rec, $index)"
-                       ng-pattern="/^[0-9]{9}$/" >
-            </md-input-container>
+  <div layout="column">
+    <div layout="row" ng-repeat="rec in rows">
+      <md-input-container>
+        <label>მობილური</label>
+        <input
+          ng-required="true"
+          type="text"
+          ng-model="rec.phone"
+          aria-label="მობილური"
+          ng-blur="verifyDuplicate(this, rec, $index)"
+          ng-pattern="/^[0-9]{9}$/"
+        />
+      </md-input-container>
 
-            <md-button class="md-fab md-mini md-primary" aria-label="add" ng-click="addElement()">
-                <md-icon>add</md-icon>
-            </md-button>
-            <md-button class="md-fab md-mini md-primary" aria-label="remove" ng-click="removeElement($index)">
-                <md-icon>delete</md-icon>
-            </md-button>
-        </div>
+      <md-button
+        class="md-fab md-mini md-primary"
+        aria-label="add"
+        ng-click="addElement()"
+      >
+        <md-icon>add</md-icon>
+      </md-button>
+      <md-button
+        class="md-fab md-mini md-primary"
+        aria-label="remove"
+        ng-click="removeElement($index)"
+      >
+        <md-icon>delete</md-icon>
+      </md-button>
     </div>
+  </div>
 </div>
-
