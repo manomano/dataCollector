@@ -24,6 +24,7 @@ var DefaultLayers = (function () {
         'ORTHO_2015_SAMEGRELO_WMS',
         'ORTHO_2015_SAMEGRELO_WMTS',
       ],
+      ['ORTHO_2020_TBILISI'],
     ];
 
     var ortho_map = {
@@ -46,6 +47,7 @@ var DefaultLayers = (function () {
       117: combinations[2],
       118: combinations[2],
       119: combinations[2],
+      120: combinations[3],
     };
 
     let orthoNameArr = ortho_map[utils.placeId()];
