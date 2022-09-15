@@ -1,3 +1,3 @@
-(function() {
-	angular.module("datacollection.services", []);
+(function () {
+  angular.module("datacollection.services", []);
 })();

@@ -1,3 +1,3 @@
-(function() {
-    angular.module("datacollection.directives", []);
+(function () {
+  angular.module("datacollection.directives", []);
 })();
