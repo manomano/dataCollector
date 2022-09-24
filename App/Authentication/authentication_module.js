@@ -1,3 +1,3 @@
-﻿(function() {
-	angular.module("datacollection.authentication", []);
+﻿(function () {
+  angular.module("datacollection.authentication", []);
 })();

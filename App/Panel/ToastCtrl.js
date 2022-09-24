@@ -1,28 +1,32 @@
-var toastController = function($rootScope, $scope, $mdToast, $mdDialog, title) {
-    var isDlgOpen = true
-    $rootScope.$watch('listenerObject.currentTitle',function (newValue, oldValue) {
-       $scope.title =  newValue;
+var toastController = function (
+  $rootScope,
+  $scope,
+  $mdToast,
+  $mdDialog,
+  title
+) {
+  var isDlgOpen = true;
+  $rootScope.$watch(
+    "listenerObject.currentTitle",
+    function (newValue, oldValue) {
+      $scope.title = newValue;
+    }
+  );
+
+  $scope.title = title;
+  $scope.closeToast = function () {
+    // if (isDlgOpen) return;
+
+    $mdToast.hide().then(function () {
+      isDlgOpen = false;
     });
+  };
 
-    $scope.title = title;
-    $scope.closeToast = function() {
-       // if (isDlgOpen) return;
+  $scope.openMoreInfo = function (e) {
+    if (isDlgOpen) return;
+    isDlgOpen = true;
 
-        $mdToast
-            .hide()
-            .then(function() {
-                isDlgOpen = false;
-            });
-    };
-
-
-
-
-    $scope.openMoreInfo = function(e) {
-        if ( isDlgOpen ) return;
-        isDlgOpen = true;
-
-        /*$mdDialog
+    /*$mdDialog
             .show($mdDialog
                 .alert()
                 .title('More info goes here.')
@@ -34,11 +38,17 @@ var toastController = function($rootScope, $scope, $mdToast, $mdDialog, title) {
             .then(function() {
                 isDlgOpen = false;
             });*/
-    };
-}
+  };
+};
 
+toastController.$inject = [
+  "$rootScope",
+  "$scope",
+  "$mdToast",
+  "$mdDialog",
+  "title",
+];
 
-
-toastController.$inject = ["$rootScope","$scope", "$mdToast", "$mdDialog","title"];
-
-angular.module("datacollection.mypanel").controller("ToastCtrl", toastController);
+angular
+  .module("datacollection.mypanel")
+  .controller("ToastCtrl", toastController);
