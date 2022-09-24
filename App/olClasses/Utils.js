@@ -1,20 +1,20 @@
 var connections_dict = {
   real: {
-    apiURL: "https://data-collector-server.napr.gov.ge/",
-    geoserverBaseURL: "https://gpv1.napr.gov.ge/wms",
+    apiURL: 'https://data-collector-server.napr.gov.ge/',
+    geoserverBaseURL: 'https://gpv1.napr.gov.ge/wms',
     NGCACHE_URL_TEMPLATE:
-      "http://dcc0.napr.gov.ge/NGCache/Layer/getTile?x={x}&y={y}&z={z}&l={l}",
-    geoServerWorkSpaceName: "DATA_COLLECTOR",
-    AUTH: "https://data-collector-server.napr.gov.ge/" + "auth/",
+      'http://dcc0.napr.gov.ge/NGCache/Layer/getTile?x={x}&y={y}&z={z}&l={l}',
+    geoServerWorkSpaceName: 'DATA_COLLECTOR',
+    AUTH: 'https://data-collector-server.napr.gov.ge/' + 'auth/',
   },
   dev: {
-    apiURL: "http://10.11.11.215:8080/",
-    geoserverBaseURL: "https://gpv1.napr.gov.ge/wms",
+    apiURL: 'http://10.11.11.215:8080/',
+    geoserverBaseURL: 'https://gpv1.napr.gov.ge/wms',
     NGCACHE_URL_TEMPLATE:
-      "http://10.11.11.191:8008/Layer/getTile?x={x}&y={y}&z={z}&l={l}",
+      'http://10.11.11.191:8008/Layer/getTile?x={x}&y={y}&z={z}&l={l}',
     //NGCACHE_URL_TEMPLATE:"http://10.11.11.234:8008/Layer/getTile?x={x}&y={y}&z={z}&l={l}",
-    geoServerWorkSpaceName: "DATA_COLLECTOR_DEVEL",
-    AUTH: "http://10.11.11.215:8080/" + "auth/",
+    geoServerWorkSpaceName: 'DATA_COLLECTOR_DEVEL',
+    AUTH: 'http://10.11.11.215:8080/' + 'auth/',
   },
 };
 
@@ -24,30 +24,30 @@ var connections = function (key) {
   }
 };
 
-var currentConnections = new connections("real");
+var currentConnections = new connections('real');
 
 var parse = ol.xml.parse;
 var Utils = (function () {
   function Utils() {
     this.featureNameTypeMap = {
-      trafficSignGeometry: "LineString",
-      busStopGeometry: "Point",
-      poiGeometry: "Point",
-      SIGN: "LineString",
-      BUS_STATION: "Point",
-      VELO_TRACK: "Road",
-      PARCEL: "Polygon",
-      parcelGeometry: "Polygon",
-      parcelEntranceGeometry: "Point",
-      buildingGeometry: "Polygon",
-      buildingEntranceGeometry: "Point",
+      trafficSignGeometry: 'LineString',
+      busStopGeometry: 'Point',
+      poiGeometry: 'Point',
+      SIGN: 'LineString',
+      BUS_STATION: 'Point',
+      VELO_TRACK: 'Road',
+      PARCEL: 'Polygon',
+      parcelGeometry: 'Polygon',
+      parcelEntranceGeometry: 'Point',
+      buildingGeometry: 'Polygon',
+      buildingEntranceGeometry: 'Point',
     };
     this.orthoLayersToRegions = {
-      Zugdidi: "ortho2015Layer",
-      Poti: "ortho2014Layer",
-      Martvili: "ortho2014Layer",
-      Kobuleti: "ortho2014Layer",
-      Sagarejo: "ortho2014Layer",
+      Zugdidi: 'ortho2015Layer',
+      Poti: 'ortho2014Layer',
+      Martvili: 'ortho2014Layer',
+      Kobuleti: 'ortho2014Layer',
+      Sagarejo: 'ortho2014Layer',
     };
 
     this.apiURL = currentConnections.apiURL;
@@ -68,7 +68,7 @@ var Utils = (function () {
   Utils.prototype.testArgs = function (args) {
     var errorCont = 0;
     for (var i in args) {
-      if (typeof args[i] == "undefined") {
+      if (typeof args[i] == 'undefined') {
         errorCont++;
       }
     }
@@ -81,82 +81,49 @@ var Utils = (function () {
 
   Utils.prototype.getStorageType = function () {
     if (localStorage) {
-      if (localStorage.getItem("Authorization")) {
-        return "localStorage";
+      if (localStorage.getItem('Authorization')) {
+        return 'localStorage';
       }
     }
 
-    return "sessionStorage";
+    return 'sessionStorage';
   };
 
   Utils.prototype.getRegion = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("Authorization"))
+    return JSON.parse(window[this.getStorageType()].getItem('Authorization'))
       .placeName;
   };
 
   Utils.prototype.getAuthorization = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("Authorization"));
+    return JSON.parse(window[this.getStorageType()].getItem('Authorization'));
   };
 
   Utils.prototype.placeId = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("Authorization"))
+    return JSON.parse(window[this.getStorageType()].getItem('Authorization'))
       .placeId;
   };
 
   Utils.prototype.getUserId = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("Authorization"))
+    return JSON.parse(window[this.getStorageType()].getItem('Authorization'))
       .userId;
   };
 
   Utils.prototype.getRole = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("Authorization"))
+    return JSON.parse(window[this.getStorageType()].getItem('Authorization'))
       .role;
   };
 
   Utils.prototype.getMapState = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("mapState"));
+    return JSON.parse(window[this.getStorageType()].getItem('mapState'));
   };
 
   Utils.prototype.isWMS = function () {
-    return JSON.parse(window[this.getStorageType()].getItem("isWMS"));
+    return JSON.parse(window[this.getStorageType()].getItem('isWMS'));
   };
 
   Utils.prototype.getDefaultView = function () {
-    var centers = [
-      [5050616.59, 5120145.93],
-      [4665739.076507242, 5175487.411411758],
-      [4687113.28553262, 5169127.6510677105],
-      [4680606.081182464, 5197407.848529335],
-      [4724777.681062616, 5222319.7005960215],
-      [4757909.235337499, 5317325.164237247],
-      [4687892.528545601, 5253040.738310996],
-      [4694396.485284994, 5234997.3678319],
-      [4667399.780371935, 5229569.59886474],
-    ];
-    var center_map = {
-      22: centers[0],
-      85: centers[2],
-      48: centers[1],
-      50: centers[1],
-      86: centers[1],
-      89: centers[1],
-      90: centers[1],
-      107: centers[3],
-      108: centers[3],
-      110: centers[4],
-      111: centers[4],
-      112: centers[5],
-      113: centers[6],
-      114: centers[6],
-      115: centers[7],
-      116: centers[7],
-      117: centers[8],
-      118: centers[8],
-      119: centers[4],
-    };
-
     return new ol.View({
-      center: center_map[this.placeId()],
+      center: TABLE.find((x) => x.placeId === this.placeId()).centers,
       zoom: 11,
       rotation: 0,
     });
@@ -164,9 +131,9 @@ var Utils = (function () {
 
   Utils.prototype.getSavedView = function (layers) {
     var resultView = null;
-    if (window.location.hash !== "") {
-      var hash = window.location.hash.replace("#map=", "");
-      var parts = hash.split("/");
+    if (window.location.hash !== '') {
+      var hash = window.location.hash.replace('#map=', '');
+      var parts = hash.split('/');
       if (parts.length === layers.length + 5) {
         var zoom = parseInt(parts[0], 10);
         var center = [parseFloat(parts[1]), parseFloat(parts[2])];
@@ -369,10 +336,17 @@ var Utils = (function () {
     });
   };
 
+  Utils.prototype.getTbilisi1View = function () {
+    return new ol.View({
+      center: [4995379.85, 5121865.14],
+      zoom: 12,
+    });
+  };
+
   Utils.prototype.focusView = function (map, features) {
     //TODO refactor if mustn't be here
     if (features.length == 0) {
-      alert("მონაცემები ვერ მოიძებნა");
+      alert('მონაცემები ვერ მოიძებნა');
       return;
     }
     var extent = ol.extent.createEmpty();
@@ -394,7 +368,7 @@ var Utils = (function () {
   ) {
     var featuresToSelect = [];
     layers.forEach(function (layer) {
-      if (layer.get("type") == layerType) {
+      if (layer.get('type') == layerType) {
         var layerSource = layer.getSource();
         layerSource.getFeatures().forEach(function (feature) {
           if (feature.getProperties()[propertieName] == propertieValue) {
@@ -407,122 +381,122 @@ var Utils = (function () {
   };
   Utils.prototype.containerForInfoWindow = function (feature) {
     var featureProperties = feature.getProperties();
-    var featureType = featureProperties["featureType"];
+    var featureType = featureProperties['featureType'];
     var resultHTML =
       '<div id="map-marker" style="height: auto;"><div class="map-num">';
-    if (featureType == "GRID_FOR_POIS") {
-      resultHTML += "ბლოკის N: " + featureProperties["GRID_ID"] + "</br>";
+    if (featureType == 'GRID_FOR_POIS') {
+      resultHTML += 'ბლოკის N: ' + featureProperties['GRID_ID'] + '</br>';
       resultHTML +=
-        "სტატუსი: " +
-        this.statusToGeorgian(featureProperties["STATUS"]) +
-        "</br>";
+        'სტატუსი: ' +
+        this.statusToGeorgian(featureProperties['STATUS']) +
+        '</br>';
       resultHTML +=
-        "ოპერატორი: " +
-        featureProperties["USER_NAME"] +
-        " " +
-        featureProperties["USER_SURNAME"] +
-        "</br>";
+        'ოპერატორი: ' +
+        featureProperties['USER_NAME'] +
+        ' ' +
+        featureProperties['USER_SURNAME'] +
+        '</br>';
       resultHTML +=
-        "დაწყება: " +
-        this.timestampToTimeString(featureProperties["START_DATE"]) +
-        "</br>";
+        'დაწყება: ' +
+        this.timestampToTimeString(featureProperties['START_DATE']) +
+        '</br>';
       resultHTML +=
-        "დამთავრება: " +
-        this.timestampToTimeString(featureProperties["END_DATE"]) +
-        "</br>";
+        'დამთავრება: ' +
+        this.timestampToTimeString(featureProperties['END_DATE']) +
+        '</br>';
       resultHTML +=
-        "გზის სიგრძე: " +
-        this.formatFloat(featureProperties["ROAD_COUNT"]) +
-        "</br>";
+        'გზის სიგრძე: ' +
+        this.formatFloat(featureProperties['ROAD_COUNT']) +
+        '</br>';
       resultHTML +=
-        "შენობები: " + featureProperties["BUILDING_COUNT"] + "</br>";
+        'შენობები: ' + featureProperties['BUILDING_COUNT'] + '</br>';
       resultHTML +=
-        "დრო: " + this.formatFloat(featureProperties["TOTAL_TIME"]) + "</br>";
+        'დრო: ' + this.formatFloat(featureProperties['TOTAL_TIME']) + '</br>';
       resultHTML +=
-        '<button onclick="map.clearInfoWindows()">Close</button>' + "</br>";
-    } else if (featureType == "ROAD_FOR_SIGNS") {
-      resultHTML += "გზის N: " + featureProperties["ROAD_ID"] + "</br>";
+        '<button onclick="map.clearInfoWindows()">Close</button>' + '</br>';
+    } else if (featureType == 'ROAD_FOR_SIGNS') {
+      resultHTML += 'გზის N: ' + featureProperties['ROAD_ID'] + '</br>';
       resultHTML +=
-        "გზის ჯგუფის N: " + featureProperties["ROAD_GROUP_ID"] + "</br>";
+        'გზის ჯგუფის N: ' + featureProperties['ROAD_GROUP_ID'] + '</br>';
       resultHTML +=
-        "სტატუსი: " +
-        this.statusToGeorgian(featureProperties["STATUS"]) +
-        "</br>";
+        'სტატუსი: ' +
+        this.statusToGeorgian(featureProperties['STATUS']) +
+        '</br>';
       resultHTML +=
-        "ოპერატორის სახელი და გვარი: " +
-        featureProperties["USER_NAME"] +
-        " " +
-        featureProperties["USER_SURNAME"] +
-        "</br>";
+        'ოპერატორის სახელი და გვარი: ' +
+        featureProperties['USER_NAME'] +
+        ' ' +
+        featureProperties['USER_SURNAME'] +
+        '</br>';
       resultHTML +=
-        "დაწყება: " +
-        this.timestampToTimeString(featureProperties["START_DATE"]) +
-        "</br>";
+        'დაწყება: ' +
+        this.timestampToTimeString(featureProperties['START_DATE']) +
+        '</br>';
       resultHTML +=
-        "დამთავრება: " +
-        this.timestampToTimeString(featureProperties["END_DATE"]) +
-        "</br>";
+        'დამთავრება: ' +
+        this.timestampToTimeString(featureProperties['END_DATE']) +
+        '</br>';
       resultHTML +=
-        "გზის სიგრძე: " +
-        this.formatFloat(featureProperties["ROAD_COUNT"]) +
-        "</br>";
+        'გზის სიგრძე: ' +
+        this.formatFloat(featureProperties['ROAD_COUNT']) +
+        '</br>';
       resultHTML +=
-        "გზის დასახელება: " + featureProperties["ROAD_NAME"] + "</br>";
+        'გზის დასახელება: ' + featureProperties['ROAD_NAME'] + '</br>';
       resultHTML +=
-        '<button onclick="map.clearInfoWindows()">Close</button>' + "</br>";
-    } else if (featureType == "ROADS_FOR_VELO_TRACKS") {
-      resultHTML += "გზის N: " + featureProperties["ROAD_ID"] + "</br>";
+        '<button onclick="map.clearInfoWindows()">Close</button>' + '</br>';
+    } else if (featureType == 'ROADS_FOR_VELO_TRACKS') {
+      resultHTML += 'გზის N: ' + featureProperties['ROAD_ID'] + '</br>';
       resultHTML +=
-        "გზის ჯგუფის N: " + featureProperties["ROAD_GROUP_ID"] + "</br>";
+        'გზის ჯგუფის N: ' + featureProperties['ROAD_GROUP_ID'] + '</br>';
       resultHTML +=
-        "სტატუსი: " +
-        this.statusToGeorgian(featureProperties["STATUS"]) +
-        "</br>";
+        'სტატუსი: ' +
+        this.statusToGeorgian(featureProperties['STATUS']) +
+        '</br>';
       resultHTML +=
-        "ოპერატორის სახელი და გვარი: " +
-        featureProperties["USER_NAME"] +
-        " " +
-        featureProperties["USER_SURNAME"] +
-        "</br>";
+        'ოპერატორის სახელი და გვარი: ' +
+        featureProperties['USER_NAME'] +
+        ' ' +
+        featureProperties['USER_SURNAME'] +
+        '</br>';
       resultHTML +=
-        "დაწყება: " +
-        this.timestampToTimeString(featureProperties["START_DATE"]) +
-        "</br>";
+        'დაწყება: ' +
+        this.timestampToTimeString(featureProperties['START_DATE']) +
+        '</br>';
       resultHTML +=
-        "დამთავრება: " +
-        this.timestampToTimeString(featureProperties["END_DATE"]) +
-        "</br>";
+        'დამთავრება: ' +
+        this.timestampToTimeString(featureProperties['END_DATE']) +
+        '</br>';
       resultHTML +=
-        "გზის სიგრძე: " +
-        this.formatFloat(featureProperties["ROAD_COUNT"]) +
-        "</br>";
+        'გზის სიგრძე: ' +
+        this.formatFloat(featureProperties['ROAD_COUNT']) +
+        '</br>';
       resultHTML +=
-        "გზის დასახელება: " + featureProperties["ROAD_NAME"] + "</br>";
+        'გზის დასახელება: ' + featureProperties['ROAD_NAME'] + '</br>';
       resultHTML +=
-        '<button onclick="map.clearInfoWindows()">Close</button>' + "</br>";
-    } else if (featureType == "VELO_TRACK") {
-      resultHTML += "ველო ტრასის ID: " + featureProperties["ID"] + "</br>";
+        '<button onclick="map.clearInfoWindows()">Close</button>' + '</br>';
+    } else if (featureType == 'VELO_TRACK') {
+      resultHTML += 'ველო ტრასის ID: ' + featureProperties['ID'] + '</br>';
       resultHTML +=
-        '<button onclick="map.clearInfoWindows()">Close</button>' + "</br>";
+        '<button onclick="map.clearInfoWindows()">Close</button>' + '</br>';
     } else return null;
     return resultHTML;
   };
   Utils.prototype.timestampToTimeString = function (timeStamp) {
-    if (timeStamp == null) return "";
+    if (timeStamp == null) return '';
     var time = new Date(timeStamp);
     return (
       new Date(timeStamp).toLocaleDateString() +
-      " (" +
+      ' (' +
       time.getHours() +
-      ":" +
+      ':' +
       time.getMinutes() +
-      ")"
+      ')'
     );
   };
   Utils.prototype.statusToGeorgian = function (status) {
-    if (status == 1) return "მიმდინარე";
-    if (status == 3) return "დაგეგმილი";
-    if (status == 2) return "დასრულებული";
+    if (status == 1) return 'მიმდინარე';
+    if (status == 3) return 'დაგეგმილი';
+    if (status == 2) return 'დასრულებული';
     return status;
   };
   Utils.prototype.formatFloat = function (float) {
@@ -530,23 +504,23 @@ var Utils = (function () {
   };
   Utils.prototype.toFeatureList = function (body) {
     return new ol.format.GeoJSON({
-      featureProjection: "EPSG:3857",
+      featureProjection: 'EPSG:3857',
     }).readFeatures(body);
   };
   Utils.prototype.convertFeature = function (body) {
     return new ol.format.GeoJSON({
-      featureProjection: "EPSG:3857",
+      featureProjection: 'EPSG:3857',
     }).writeFeature(body);
   };
 
   Utils.prototype.convertFeatures = function (body) {
     return new ol.format.GeoJSON({
-      featureProjection: "EPSG:3857",
+      featureProjection: 'EPSG:3857',
     }).writeFeatures(body);
   };
 
   Utils.prototype.getFeatureDescription = function (feature) {
-    return feature.get("featureType") + "_" + feature.getProperties()["ID"];
+    return feature.get('featureType') + '_' + feature.getProperties()['ID'];
   };
   return Utils;
 })();
