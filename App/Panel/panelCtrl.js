@@ -105,7 +105,15 @@
       LAYERS = new TrafficSignOperatorLayers(layerClassInstance);
     }
 
-    var view = utils['get' + sessionVar.placeName + 'View'];
+    let view = utils['get' + sessionVar.placeName + 'View'];
+    if (!view) {
+      const placeName = sessionVar.placeName.split('').reduce((a, b) => {
+        a = a + (b.charCodeAt(0) >= 48 && b.charCodeAt(0) <= 57 ? '' : b);
+        return a;
+      });
+      view = utils['get' + placeName + 'View'];
+    }
+
     $rootScope.map = new MapController(LAYERS.layersList, 'map', view);
 
     if ($rootScope.isWMS) {
