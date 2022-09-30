@@ -2,7 +2,9 @@ var DefaultLayers = (function () {
   function DefaultLayers() {}
 
   DefaultLayers.prototype.getOrtholist = function () {
-    const orthoNameArr = TABLE.filter((x) => x.placeId === utils.placeId());
+    const orthoNameArr = TABLE.filter((x) => x.placeId === utils.placeId()).map(
+      (r) => r.mapName
+    );
 
     let orthoArr = [];
     let orthoMap = {};
