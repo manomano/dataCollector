@@ -211,6 +211,13 @@
         },
         { key: 'none|1', title: 'arcerti' },
       ],
+      [
+        {
+          key: 'ORTHO_2020_TBILISI',
+          title: 'ORTHO_2020_TBILISI',
+        },
+        { key: 'none|1', title: 'arcerti' },
+      ],
     ];
 
     $scope.orthoOpposites = {

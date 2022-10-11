@@ -1,4 +1,4 @@
-var DefaultLayers = (function () {
+const DefaultLayers = (function () {
   function DefaultLayers() {}
 
   DefaultLayers.prototype.getOrtholist = function () {
@@ -27,17 +27,9 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=BATUMI_2015';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=BATUMI_2015`;
           return url;
         },
       }),
@@ -260,17 +252,9 @@ var DefaultLayers = (function () {
         cacheSize: 20,
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2014_COL';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2014_COL`;
           // let url = "http://navigation-cache.napr.gov.ge/NGCache/Layer/getTile?x=" + x + "&y=" + y + "&z=" + z + "&l=ORTHO_2014_COL";
           return url;
         },
@@ -291,17 +275,9 @@ var DefaultLayers = (function () {
         //cacheSize: 20,
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt2.napr.gov.ge/ng-cache/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_GEORGIA_COL';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `http://nt2.napr.gov.ge/ng-cache/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_GEORGIA_COL`;
           return url;
         },
       }),
@@ -421,17 +397,9 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2010_COL';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2010_COL`;
           return url;
         },
       }),
@@ -449,17 +417,9 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2015_COL';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2015_COL`;
           return url;
         },
       }),
@@ -477,17 +437,9 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2005_COL';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2005_COL`;
           return url;
         },
       }),
@@ -505,17 +457,8 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt2.napr.gov.ge/ng-cache/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_AT_BORDER_SAT';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+          var url = `http://nt2.napr.gov.ge/ng-cache/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_AT_BORDER_SAT`;
 
           return url;
         },
@@ -536,19 +479,9 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt2.napr.gov.ge/ng-cache/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2016_2017_COL';
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
 
-          return url;
+          return `http://nt2.napr.gov.ge/ng-cache/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2016_2017_COL`;
         },
       }),
       visible: false,
@@ -559,7 +492,7 @@ var DefaultLayers = (function () {
   };
 
   DefaultLayers.prototype.ortho2000Layer = function () {
-    var extent = [
+    const extent = [
       43.41939043236596, 42.01151983284973, 43.55818110615685,
       42.13100587979776,
     ];
@@ -571,18 +504,8 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2000_BW';
-          return url;
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+          return `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2000_BW`;
         },
       }),
       // extent: ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'),
@@ -603,18 +526,8 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://nt0.reestri.gov.ge/NGCache?x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z +
-            '&l=ORTHO_2016_COL';
-          return url;
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+          return `http://nt0.reestri.gov.ge/NGCache?x=${x}&y=${y}&z=${z}&l=ORTHO_2016_COL`;
         },
       }),
       visible: false,
@@ -633,7 +546,7 @@ var DefaultLayers = (function () {
     return layer;
   };
   DefaultLayers.prototype.googleSateliteOrtho = function () {
-    var extent = [
+    const extent = [
       43.41939043236596, 42.01151983284973, 43.55818110615685,
       42.13100587979776,
     ];
@@ -645,23 +558,43 @@ var DefaultLayers = (function () {
       source: new ol.source.TileImage({
         tileUrlFunction: function (coordinate) {
           if (coordinate === null) return undefined;
-          var z = coordinate[0];
-          var x = coordinate[1];
-          var y = -coordinate[2] - 1;
-          var url =
-            'http://khm1.googleapis.com/kh?v=724&hl=en-US&&x=' +
-            x +
-            '&y=' +
-            y +
-            '&z=' +
-            z;
-          return url;
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+          return `http://khm1.googleapis.com/kh?v=724&hl=en-US&&x=${x}&y=${y}&z=${z}`;
         },
       }),
       // extent: ol.proj.transformExtent(extent, 'EPSG:4326', 'EPSG:3857'),
       visible: false,
     });
     layer.set('type', 'ortho');
+    return layer;
+  };
+
+  DefaultLayers.prototype.ORTHO_2020_TBILISI = function () {
+    const [resolutions, matrixIds, projection, projectionExtent] =
+      getResolutionAndIdis('EPSG:900913');
+    const layerName = 'ORTHO_2020_TBILISI';
+
+    var layer = new ol.layer.Tile({
+      opacity: 0.8,
+      style: 'default',
+      wrapX: true,
+      visible: false,
+      source: new ol.source.WMTS({
+        url: `http://mp.napr.gov.ge/${layerName}/wmts/${layerName}/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.png`,
+        layer: layerName,
+        matrixSet: 'GLOBAL_MERCATOR',
+        format: 'image/png',
+        projection,
+        requestEncoding: 'REST',
+        tileGrid: new ol.tilegrid.WMTS({
+          origin: ol.extent.getTopLeft(projectionExtent),
+          resolutions: resolutions,
+          matrixIds: matrixIds,
+        }),
+      }),
+    });
+    layer.set('type', 'tile');
+    layer.set('name', layerName);
     return layer;
   };
   return DefaultLayers;
