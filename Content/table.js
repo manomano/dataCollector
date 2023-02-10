@@ -539,4 +539,20 @@ const TABLE = [
     mapName: 'ORTHO_2020_TBILISI',
     centers: [4724777.681062616, 5222319.7005960215],
   },
+  {
+    placeId: 121,
+    mapName: 'all_georgia_geo',
+    centers: [4724777.681062616, 5222319.7005960215],
+  },
+  {
+    placeId: 121,
+    mapName: 'all_georgia_norv',
+    centers: [4724777.681062616, 5222319.7005960215],
+  },
+
+  {
+    placeId: 121,
+    mapName: 'all_georgia_geoOrtho',
+    centers: [4724777.681062616, 5222319.7005960215],
+  },
 ];

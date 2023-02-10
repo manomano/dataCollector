@@ -2,7 +2,8 @@ const DefaultLayers = (function () {
   function DefaultLayers() {}
 
   DefaultLayers.prototype.getOrtholist = function () {
-    const orthoNameArr = TABLE.filter((x) => x.placeId === utils.placeId()).map(
+    const currentPlaceId = utils.placeId();
+    const orthoNameArr = TABLE.filter((x) => x.placeId === currentPlaceId).map(
       (r) => r.mapName
     );
 
@@ -597,6 +598,57 @@ const DefaultLayers = (function () {
     layer.set('name', layerName);
     return layer;
   };
+
+  DefaultLayers.prototype.generalTile = function ({
+    urlLeft,
+    urlRight,
+    layerName,
+  }) {
+    var layer = new ol.layer.Tile({
+      preload: 1,
+      opacity: 0.8,
+      defaultProjection: 'EPSG:900913',
+      projection: 'EPSG:4326',
+      source: new ol.source.TileImage({
+        tileUrlFunction: function (coordinate) {
+          if (coordinate === null) return undefined;
+          const [z, x, y] = [coordinate[0], coordinate[1], -coordinate[2] - 1];
+
+          var url = `${urlLeft}?x=${x}&y=${y}&z=${z}&${urlRight}`;
+          return url;
+        },
+      }),
+      visible: false,
+    });
+    layer.set('type', 'ortho');
+    layer.set('name', layerName);
+    return layer;
+  };
+
+  DefaultLayers.prototype.all_georgia_geo = function () {
+    return this.generalTile({
+      urlLeft: 'http://nt0.napr.gov.ge/NGCache',
+      urlRight: 'l=COVERAGE',
+      layerName: 'all_georgia_geo',
+    });
+  };
+
+  DefaultLayers.prototype.all_georgia_norv = function () {
+    return this.generalTile({
+      urlLeft: 'http://nt0.napr.gov.ge/NGCache',
+      urlRight: 'l=NORV',
+      layerName: 'all_georgia_norv',
+    });
+  };
+
+  DefaultLayers.prototype.all_georgia_geoOrtho = function () {
+    return this.generalTile({
+      urlLeft: 'http://nt0.napr.gov.ge/NGCache',
+      urlRight: 'l=ORTHO_GEORGIA_4',
+      layerName: 'all_georgia_geoOrtho',
+    });
+  };
+
   return DefaultLayers;
 })();
 //# sourceMappingURL=DefaultLayers.js.map

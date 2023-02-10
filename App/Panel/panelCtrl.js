@@ -159,6 +159,57 @@
       }
     }
 
+    $scope.orthoPairs = [
+      [
+        { key: 'ORTHO_2014_DASAVLETI', title: 'ORTHO 2014 WMTS', groupId: 1 },
+        {
+          key: 'ORTHO_2014_DASAVLETI_WMS',
+          title: 'ORTHO 2014 WMS',
+          groupId: 1,
+        },
+        { key: 'none|0', title: 'არცერთი', groupId: 1 },
+      ],
+      [
+        { key: 'ORTHO_2016_17_NORV', title: 'ORTHO 2016 WMS', groupId: 2 },
+        {
+          key: 'ORTHO_2016_17_NORV_WMTS',
+          title: 'ORTHO 2016 WMTS',
+          groupId: 2,
+        },
+        { key: 'none|1', title: 'არცერთი', groupId: 2 },
+      ],
+      [
+        {
+          key: 'ORTHO_2015_SAMEGRELO_WMS',
+          title: 'ORTHO 2015 samegrelo',
+          groupId: 3,
+        },
+        {
+          key: 'ORTHO_2015_SAMEGRELO_WMTS',
+          title: 'ORTHO 2015 samegrelo WMTS',
+          groupId: 3,
+        },
+        { key: 'none|1', title: 'არცერთი', groupId: 3 },
+      ],
+      [
+        {
+          key: 'ORTHO_2020_TBILISI',
+          title: 'ORTHO_2020_TBILISI',
+          groupId: 4,
+        },
+        { key: 'none|1', title: 'არცერთი', groupId: 4 },
+      ],
+      [
+        { key: 'all_georgia_geo', title: 'all georgia geo', groupId: 5 },
+        { key: 'all_georgia_norv', title: 'all georgia norv', groupId: 5 },
+        {
+          key: 'all_georgia_geoOrtho',
+          title: 'all georgia geo ortho',
+          groupId: 5,
+        },
+        { key: 'none|1', title: 'არცერთი', groupId: 5 },
+      ],
+    ];
     $scope.layerChecks = [];
     $scope.layerDictionary = {
       parcels: 'ნაკვეთები',
@@ -181,44 +232,17 @@
       geoCol: 'geoCol',
       orthoNorv: 'orthoNorv',
       ORTHO_2000_10_SATEL: 'ORTHO 2000-10 SATEL',
-      /* 'ORTHO_2014_DASAVLETI':'ORTHO 2014 VMTS',
-            "ORTHO_2014_DASAVLETI_WMS":"ORTHO 2014 VMS",
-            "ORTHO_2016_17_NORV_WMTS":"ORTHO 2016 WMTS",
-            "ORTHO_2016_17_NORV":"ORTHO 2016 WMS"*/
+      ...$scope.orthoPairs
+        .map((block) => block.filter((x) => x.key !== 'nonde|1'))
+        .flat()
+        .map((y) => y.key)
+        .reduce((acc, curValue) => ({ ...acc, [curValue]: curValue }), {}),
     };
 
     $scope.orthoPairValues = {
       0: { value: '', lastValue: '' },
       1: { value: '', lastValue: '' },
     };
-
-    $scope.orthoPairs = [
-      [
-        { key: 'ORTHO_2014_DASAVLETI', title: 'ORTHO 2014 WMTS' },
-        { key: 'ORTHO_2014_DASAVLETI_WMS', title: 'ORTHO 2014 WMS' },
-        { key: 'none|0', title: 'arcerti' },
-      ],
-      [
-        { key: 'ORTHO_2016_17_NORV', title: 'ORTHO 2016 WMS' },
-        { key: 'ORTHO_2016_17_NORV_WMTS', title: 'ORTHO 2016 WMTS' },
-        { key: 'none|1', title: 'arcerti' },
-      ],
-      [
-        { key: 'ORTHO_2015_SAMEGRELO_WMS', title: 'ORTHO 2015 samegrelo' },
-        {
-          key: 'ORTHO_2015_SAMEGRELO_WMTS',
-          title: 'ORTHO 2015 samegrelo WMTS',
-        },
-        { key: 'none|1', title: 'arcerti' },
-      ],
-      [
-        {
-          key: 'ORTHO_2020_TBILISI',
-          title: 'ORTHO_2020_TBILISI',
-        },
-        { key: 'none|1', title: 'arcerti' },
-      ],
-    ];
 
     $scope.orthoOpposites = {
       ORTHO_2014_DASAVLETI: 'ORTHO_2014_DASAVLETI_WMS',
@@ -240,6 +264,7 @@
             value: name,
           });
         }
+
         if ($scope.orthoOpposites.hasOwnProperty(name)) {
           if (el.get('visible')) {
             $scope.orthoPairValues[name.indexOf('NORV') >= 0 ? 1 : 0].value =
@@ -268,17 +293,14 @@
     };
 
     $scope.selectOrtho = function (selected, it) {
-      console.log(it);
-      if (selected.value.substring(0, 4) == 'none') {
-        for (let i = 0; i < 2; i++) {
-          $scope.changeLayerVisibilityByValue(it.pair[i].key, false);
-        }
-      } else {
+      console.log(`selected: ${selected} and it: ${it}`);
+
+      it.pair
+        .filter((x) => x.key !== selected.value && x.key !== 'none|1')
+        .map((item) => $scope.changeLayerVisibilityByValue(item.key, false));
+
+      if (selected.value.substring(0, 4) !== 'none') {
         $scope.changeLayerVisibilityByValue(selected.value, true);
-        $scope.changeLayerVisibilityByValue(
-          $scope.orthoOpposites[selected.value],
-          false
-        );
       }
     };
 
